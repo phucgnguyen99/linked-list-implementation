@@ -9,3 +9,17 @@ class Node(Generic[T]):
     value: T
     next: Optional["Node[T]"] = None
 
+class LinkedList(Generic[T]):
+    """Singly linked list with a pythonic interface."""
+
+    def __init__(self, iterable: Optional[Iterable[T]] = None) -> None:
+        self._head: Optional[Node[T]] = None
+        self._tail: Optional[Node[T]] = None
+        self._size: int = 0
+        if iterable is not None:
+            for x in iterable:
+                self.append(x)
+
+    # --- basic protocol ---
+    def __len__(self) -> int:
+        return self._size
