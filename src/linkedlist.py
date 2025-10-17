@@ -23,3 +23,15 @@ class LinkedList(Generic[T]):
     # --- basic protocol ---
     def __len__(self) -> int:
         return self._size
+
+    def __iter__(self) -> Iterator[T]:
+        cur = self._head
+        while cur is not None:
+            yield cur.value
+            cur = cur.next
+
+    def __repr__(self) -> str:
+        return f"LinkedList({list(self)!r})"
+
+    def __contains__(self, item: T) -> bool:  # enables `in`
+        return self.find(item) != -1
