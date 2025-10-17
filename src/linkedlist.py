@@ -35,3 +35,16 @@ class LinkedList(Generic[T]):
 
     def __contains__(self, item: T) -> bool:  # enables `in`
         return self.find(item) != -1
+
+    # --- helpers ---
+    def _node_at(self, index: int) -> Node[T]:
+        """Return the node at a non-negative index. Raises IndexError if OOB."""
+        if index < 0 or index >= self._size:
+            raise IndexError("index out of range")
+        cur = self._head
+        for _ in range(index):
+            assert cur is not None  # for type-checkers
+            cur = cur.next
+        assert cur is not None
+        return cur
+
